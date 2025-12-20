@@ -9,34 +9,35 @@ function App() {
                     <div class="flex justify-between items-center h-16">
                         <div class="flex-shrink-0 flex items-center">
                             <span class="text-2xl font-bold text-indigo-600">
-                                Logo
+                                =
                             </span>
+                            <a
+                                href="#"
+                                class="text-gray-900 hover:text-indigo-600"
+                            >
+                                Eng
+                            </a>
                         </div>
+
+                        <a
+                            href="#"
+                            class="font-bold text-2xl text-gray-900 hover:text-indigo-600"
+                        >
+                            CHOPSTICKSTORY
+                        </a>
 
                         <nav class="hidden md:flex space-x-8">
                             <a
                                 href="#"
-                                class="text-gray-900 hover:text-indigo-600"
+                                class="text-gray-500 hover:text-indigo-600"
                             >
-                                Home
+                                Login
                             </a>
                             <a
                                 href="#"
-                                class="text-gray-900 hover:text-indigo-600"
+                                class="text-gray-500 hover:text-indigo-600"
                             >
-                                About
-                            </a>
-                            <a
-                                href="#"
-                                class="text-gray-900 hover:text-indigo-600"
-                            >
-                                Services
-                            </a>
-                            <a
-                                href="#"
-                                class="text-gray-900 hover:text-indigo-600"
-                            >
-                                Contact
+                                Sign in
                             </a>
                         </nav>
 
