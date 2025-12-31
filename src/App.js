@@ -9,7 +9,7 @@ function App() {
                     <div class="flex justify-between items-center h-16">
                         <div class="flex-shrink-0 flex items-center">
                             <span class="text-2xl font-bold text-indigo-600">
-                                =
+                                = 
                             </span>
                             <a
                                 href="#"
