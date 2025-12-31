@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
-import './styles/About.css';
-import './styles/Footer.css';
-import Header from './components/Header';
+import '../styles/About.css';
+import '../styles/Footer.css';
+import Header from '../components/Header';
 
 export default function About() {
     useEffect(() => {
