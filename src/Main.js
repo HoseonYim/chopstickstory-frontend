@@ -1,4 +1,4 @@
-import './style.css';
+import './styles.css';
 import a from './assets/STAMP-LOGO.webp';
 import b from './assets/Sample/toa-heftiba-6bKpHAun4d8-unsplash.jpg';
 import c from './assets/STAMP-LOGO.webp';
@@ -103,11 +103,24 @@ export default function Main() {
                             <p>CHOPSTICKSTORY</p>
                         </a>
                     </div>
-                    <div className="chopsticks">
-                        <span></span>
-                        <span></span>
-                        <span></span>
+
+                    <div className="header-right">
+                        <div className="login">
+                            <a href='#'>
+                                Login
+                            </a>
+                            <a href='#'>
+                                Sign In
+                            </a>
+                        </div>
+
+                        <div className="chopsticks">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
                     </div>
+
                 </div>
             </header>
 
@@ -116,6 +129,7 @@ export default function Main() {
                     <a href="index.html" aria-current="page">
                         Home
                     </a>
+
                     <div className="dropdown">
                         <div className="dropdown-header">
                             <a href="about.html" className="menu-link">

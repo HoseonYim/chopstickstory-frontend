@@ -19,6 +19,23 @@ header {
     margin: 0 auto;
 }
 
+.header-right {
+    display: flex;
+}
+
+.login {
+    display: flex;
+    gap: 8px;
+}
+
+.login a {
+    display: flex;
+    align-items: center;
+    font-weight: 300;
+    font-size: 1rem;
+    padding-left:10px
+}
+
 .logo {
     max-width: 80%;
 }
@@ -45,6 +62,9 @@ header {
     cursor: pointer;
     user-select: none;
     z-index: 1001;
+    padding-left: 15px;
+    margin-left: 18px;
+    /* padding-right: 15px; */
 }
 
 .chopsticks span {
