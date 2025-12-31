@@ -1,10 +1,10 @@
+import './style.css';
 import a from './assets/STAMP-LOGO.webp';
 import b from './assets/Sample/toa-heftiba-6bKpHAun4d8-unsplash.jpg';
 import c from './assets/STAMP-LOGO.webp';
 import d from './assets/Sample/adam-jang-8pOTAtyd_Mc-unsplash.jpg';
 import e from './assets/Sample/adrien-bruneau-8cpR_Yf0rQs-unsplash.jpg';
 import f from './assets/Sample/luca-upper-Z-4kOr93RCI-unsplash.jpg';
-import g from './assets/Sample/nick-fewings-WqO0As9Od8U-unsplash.jpg';
 import React, { useEffect } from 'react';
 
 export function useMetadata(metadata) {
