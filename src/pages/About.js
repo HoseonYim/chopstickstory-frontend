@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import '../styles/About.css';
 import '../styles/Footer.css';
-import Header from '../components/Header';
+import Header from '../Header';
 import a from '../assets/Sample/toa-heftiba-6bKpHAun4d8-unsplash.jpg';
 import b from '../assets/cropped-cropped-CHOPSTICKSTORY-7.webp';
 import c from '../assets/Sample/alex-alvarez-63YVMrL2d6g-unsplash.jpg';
