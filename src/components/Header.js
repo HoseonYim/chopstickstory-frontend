@@ -1,4 +1,5 @@
 import '../styles/Header.css';
+import logo from '../assets/STAMP-LOGO.webp';
 
 export default function Header() {
     return (
@@ -7,7 +8,7 @@ export default function Header() {
                 <div className="logo">
                     <a href="/index.html">
                         <img
-                            src="../assets/STAMP-LOGO.webp"
+                            src={logo}
                             className="logo-img"
                             alt="CHOPSTICKSTORY logo"
                         />

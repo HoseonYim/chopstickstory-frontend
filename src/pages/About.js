@@ -2,6 +2,20 @@ import React, { useEffect } from 'react';
 import '../styles/About.css';
 import '../styles/Footer.css';
 import Header from '../components/Header';
+import a from '../assets/Sample/toa-heftiba-6bKpHAun4d8-unsplash.jpg';
+import b from '../assets/cropped-cropped-CHOPSTICKSTORY-7.webp';
+import c from '../assets/Sample/alex-alvarez-63YVMrL2d6g-unsplash.jpg';
+import d from '../assets/Sample/lidya-nada-_0aKQa9gr4s-unsplash.jpg';
+import e from '../assets/Sample/erik-mclean-qYV86rlxHLQ-unsplash.jpg';
+import f from '../assets/Sample/sasha-freemind-frq5Q6Ne9k4-unsplash.jpg';
+import g from '../assets/Sample/andre-hunter-p-I9wV811qk-unsplash.jpg';
+import h from '../assets/Sample/paul-pastourmatzis-8kDOOrs608I-unsplash.jpg';
+import i from '../assets/Sample/alvin-mahmudov-FlLHbmF3AHc-unsplash.jpg';
+import j from '../assets/Sample/morgan-sessions-YIN4xUBaqnk-unsplash.jpg';
+import k from '../assets/Sample/zhuo-cheng-you-Y-TzM28dDhU-unsplash.jpg';
+import l from '../assets/Sample/averie-woodard-5d20kdvFCfA-unsplash.jpg';
+import m from '../assets/Sample/jacqueline-munguia-1pAwJiCD60c-unsplash.jpg';
+import n from '../assets/Sample/yuyang-liu-VOV0q44b7R4-unsplash.jpg';
 
 export default function About() {
     useEffect(() => {
@@ -54,8 +68,6 @@ export default function About() {
             true
         );
     }, []);
-
-    const imgPath = (p) => `${process.env.PUBLIC_URL}${p}`;
 
     return (
         <div className="about-page">
@@ -202,12 +214,7 @@ export default function About() {
 
             <main className="about-main">
                 <section className="hero-section" aria-label="Hero Image">
-                    <img
-                        src={imgPath(
-                            '/images/Sample/toa-heftiba-6bKpHAun4d8-unsplash.jpg'
-                        )}
-                        alt="Team members collaborating"
-                    />
+                    <img src={a} alt="Team members collaborating" />
                 </section>
 
                 <section
@@ -216,9 +223,7 @@ export default function About() {
                     aria-labelledby="about-heading"
                 >
                     <img
-                        src={imgPath(
-                            '/images/cropped-cropped-CHOPSTICKSTORY-7.webp'
-                        )}
+                        src={b}
                         alt="CHOPSTICKSTORY Logo"
                         className="about-logo"
                     />
@@ -269,34 +274,19 @@ export default function About() {
                         <h3 className="team-title">Board of Directors</h3>
                         <div className="team-grid">
                             <div className="team-member">
-                                <img
-                                    src={imgPath(
-                                        '/images/Sample/alex-alvarez-63YVMrL2d6g-unsplash.jpg'
-                                    )}
-                                    alt="Younjae Choi"
-                                />
+                                <img src={c} alt="Younjae Choi" />
                                 <h4>Younjae Choi</h4>
                                 <p className="position">
                                     Executive Director/Founder
                                 </p>
                             </div>
                             <div className="team-member">
-                                <img
-                                    src={imgPath(
-                                        '/images/Sample/lidya-nada-_0aKQa9gr4s-unsplash.jpg'
-                                    )}
-                                    alt="Samanda Cavallaro"
-                                />
+                                <img src={d} alt="Samanda Cavallaro" />
                                 <h4>Samanda Cavallaro</h4>
                                 <p className="position">Secretary/Co-Founder</p>
                             </div>
                             <div className="team-member">
-                                <img
-                                    src={imgPath(
-                                        '/images/Sample/erik-mclean-qYV86rlxHLQ-unsplash.jpg'
-                                    )}
-                                    alt="Shihyun Helen Kang"
-                                />
+                                <img src={e} alt="Shihyun Helen Kang" />
                                 <h4>Shihyun Helen Kang</h4>
                                 <p className="position">
                                     Treasurer/CFO, Co-Founder
@@ -309,12 +299,7 @@ export default function About() {
                         <h3 className="team-title">Admin Team</h3>
                         <div className="team-grid">
                             <div className="team-member">
-                                <img
-                                    src={imgPath(
-                                        '/images/Sample/sasha-freemind-frq5Q6Ne9k4-unsplash.jpg'
-                                    )}
-                                    alt="Eunju Lee"
-                                />
+                                <img src={f} alt="Eunju Lee" />
                                 <h4>Eunju Lee</h4>
                                 <p className="position">
                                     Administrative Manager
@@ -327,12 +312,7 @@ export default function About() {
                         <h3 className="team-title">Outreach Team</h3>
                         <div className="team-grid">
                             <div className="team-member">
-                                <img
-                                    src={imgPath(
-                                        '/images/Sample/andre-hunter-p-I9wV811qk-unsplash.jpg'
-                                    )}
-                                    alt="Jaehyun Lee"
-                                />
+                                <img src={g} alt="Jaehyun Lee" />
                                 <h4>Jaehyun Lee</h4>
                                 <p className="position">Outreach Manager</p>
                             </div>
@@ -343,24 +323,14 @@ export default function About() {
                         <h3 className="team-title">Event Support Team</h3>
                         <div className="team-grid">
                             <div className="team-member">
-                                <img
-                                    src={imgPath(
-                                        '/images/Sample/paul-pastourmatzis-8kDOOrs608I-unsplash.jpg'
-                                    )}
-                                    alt="Raehyung Lee"
-                                />
+                                <img src={h} alt="Raehyung Lee" />
                                 <h4>Raehyung Lee</h4>
                                 <p className="position">
                                     Event Support Manager
                                 </p>
                             </div>
                             <div className="team-member">
-                                <img
-                                    src={imgPath(
-                                        '/images/Sample/alvin-mahmudov-FlLHbmF3AHc-unsplash.jpg'
-                                    )}
-                                    alt="Daniel Yang"
-                                />
+                                <img src={i} alt="Daniel Yang" />
                                 <h4>Daniel Yang</h4>
                                 <p className="position">
                                     Event Support Assistant
@@ -375,12 +345,7 @@ export default function About() {
                         </h3>
                         <div className="team-grid">
                             <div className="team-member">
-                                <img
-                                    src={imgPath(
-                                        '/images/Sample/morgan-sessions-YIN4xUBaqnk-unsplash.jpg'
-                                    )}
-                                    alt="Yewon Kim"
-                                />
+                                <img src={j} alt="Yewon Kim" />
                                 <h4>Yewon Kim</h4>
                                 <p className="position">Operations Manager</p>
                             </div>
@@ -391,22 +356,12 @@ export default function About() {
                         <h3 className="team-title">Web Development Team</h3>
                         <div className="team-grid">
                             <div className="team-member">
-                                <img
-                                    src={imgPath(
-                                        '/images/Sample/zhuo-cheng-you-Y-TzM28dDhU-unsplash.jpg'
-                                    )}
-                                    alt="Theo Lee"
-                                />
+                                <img src={k} alt="Theo Lee" />
                                 <h4>Theo Lee</h4>
                                 <p className="position">Software Engineer</p>
                             </div>
                             <div className="team-member">
-                                <img
-                                    src={imgPath(
-                                        '/images/Sample/averie-woodard-5d20kdvFCfA-unsplash.jpg'
-                                    )}
-                                    alt="Hyunseo Lee"
-                                />
+                                <img src={l} alt="Hyunseo Lee" />
                                 <h4>Hyunseo Lee</h4>
                                 <p className="position">Web Designer</p>
                             </div>
@@ -419,22 +374,12 @@ export default function About() {
                         </h3>
                         <div className="team-grid">
                             <div className="team-member">
-                                <img
-                                    src={imgPath(
-                                        '/images/Sample/jacqueline-munguia-1pAwJiCD60c-unsplash.jpg'
-                                    )}
-                                    alt="Jungeun Lim"
-                                />
+                                <img src={m} alt="Jungeun Lim" />
                                 <h4>Jungeun Lim</h4>
                                 <p className="position">Social Media Manager</p>
                             </div>
                             <div className="team-member">
-                                <img
-                                    src={imgPath(
-                                        '/images/Sample/yuyang-liu-VOV0q44b7R4-unsplash.jpg'
-                                    )}
-                                    alt="Gureum Kang"
-                                />
+                                <img src={n} alt="Gureum Kang" />
                                 <h4>Gureum Kang</h4>
                                 <p className="position">Content Manager</p>
                             </div>
