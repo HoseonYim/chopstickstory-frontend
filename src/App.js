@@ -2,6 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 import { Routes, Route, Link } from 'react-router-dom';
 import About from './pages/About';
+import Main from './Main';
 
 function App() {
     return (
@@ -13,7 +14,7 @@ function App() {
 
             {/* Define the routes */}
             <Routes>
-                <Route path="/" element={<About />} />
+                <Route path="/" element={<Main />} />
                 <Route path="/about" element={<About />} />
             </Routes>
         </div>
