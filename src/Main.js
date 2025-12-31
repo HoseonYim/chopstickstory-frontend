@@ -6,6 +6,7 @@ import d from './assets/Sample/adam-jang-8pOTAtyd_Mc-unsplash.jpg';
 import e from './assets/Sample/adrien-bruneau-8cpR_Yf0rQs-unsplash.jpg';
 import f from './assets/Sample/luca-upper-Z-4kOr93RCI-unsplash.jpg';
 import React, { useEffect } from 'react';
+import { useRef } from 'react';
 
 export function useMetadata(metadata) {
     useEffect(() => {
@@ -73,6 +74,7 @@ export function useMetadata(metadata) {
     }, [metadata]);
 }
 
+
 export default function Main() {
     useMetadata({
         charset: 'UTF-8',
@@ -88,6 +90,26 @@ export default function Main() {
         ogImage: './images/STAMP-LOGO.webp',
         ogUrl: 'https://theolee021.github.io/ChopstickStory/',
     });
+
+
+    const chopsticksRef = useRef(null);
+    const navRef = useRef(null);
+    const overlayRef = useRef(null);
+
+
+    function toggleMenu() {
+        if(chopsticksRef.current) {
+            chopsticksRef.current.classList.toggle('active');
+        }
+        if (navRef.current) {
+            navRef.current.classList.toggle('active')
+        }
+        if (overlayRef.current) {
+            overlayRef.current.classList.toggle('active')
+        }
+    
+        document.body.style.overflow = navRef.current.classList.contains('active') ? 'hidden' : '';
+    }
 
     return (
         // <html lang="ko">
@@ -114,17 +136,17 @@ export default function Main() {
                             </a>
                         </div>
 
-                        <div className="chopsticks">
+                        <button onClick={toggleMenu} className="chopsticks" ref={chopsticksRef}>
                             <span></span>
                             <span></span>
                             <span></span>
-                        </div>
+                        </button>
                     </div>
 
                 </div>
             </header>
 
-            <nav aria-label="Main navigation">
+            <nav aria-label="Main navigation" ref={navRef}>
                 <div className="menu-links">
                     <a href="index.html" aria-current="page">
                         Home
@@ -216,7 +238,7 @@ export default function Main() {
                 </div>
             </nav>
 
-            <div className="overlay"></div>
+            <div className="overlay" ref={overlayRef}></div>
 
             <main>
                 <div
