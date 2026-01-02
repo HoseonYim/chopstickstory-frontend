@@ -17,6 +17,108 @@ main {
     flex: 1;
 }
 
+/* Login Page Styles */
+
+.login-container {
+    position: relative;
+    margin-top: var(--header-height);
+    height:calc(100vh - var(--header-height));
+}
+
+.login-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.login-background img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+.login-widget {
+    position: absolute;
+    top: 5rem;
+    left: 7rem;
+    height: 43.96rem;
+    width: 30rem;
+    background-color:rgba(255,255,255,0.7);
+    z-index:2;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 1rem;
+}
+
+.login-widget img {
+    width: 30%;
+    object-fit: scale-down;
+    padding-top: 1.5rem;
+    padding-bottom: 2rem;
+}
+
+.login-widget input {
+    width: 90%;
+    height: 3rem;
+    background-color:#dededede;
+    border-radius: 0.5rem;
+    margin: 0.5rem;
+    color:black;
+    padding-left:0.8rem;
+}
+
+.login-widget input::placeholder {
+    color: #787878;
+}
+
+.login-button {
+    width: 90%;
+    height: 3rem;
+    background-color:#000000de;
+    border-radius: 0.5rem;
+    margin: 0.5rem;
+    color:white;
+    padding-left:0.8rem;
+    margin-top:2.5rem;
+}
+
+.sign-in-button {
+    width: 90%;
+    height: 3rem;
+    background-color:rgba(255,255,255,0.7);
+    border-radius: 0.5rem;
+    margin: 0.5rem;
+    color:black;
+    padding-left:0.8rem;
+    border: 0.1rem solid #dededede;
+}
+
+.login-widget a {
+    align-self: flex-end;
+    text-align: right;
+    margin-right: 1.6rem;
+    font-size:0.8rem;
+}
+
+.login-widget hr {
+    width: 95%;  
+    height: 0.1rem;  
+    border: none;  
+    background-color: #dededede;  
+    margin: 2rem 0;
+    padding: 0;
+}
+
+
+
+
+
 /* Slider Navigation */
 .slider-nav {
     position: absolute;

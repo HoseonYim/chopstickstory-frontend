@@ -3,6 +3,7 @@ import './App.css';
 import { Routes, Route, Link } from 'react-router-dom';
 import About from './pages/About';
 import Main from './Main.js';
+import Login from './Login';
 
 function App() {
     return (
@@ -14,7 +15,7 @@ function App() {
 
             {/* Define the routes */}
             <Routes>
-                <Route path="/" element={<Main />} />
+                <Route path="/" element={<Login />} />
                 <Route path="/about" element={<About />} />
             </Routes>
         </div>

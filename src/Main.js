@@ -125,7 +125,6 @@ export default function Main() {
                             <p>CHOPSTICKSTORY</p>
                         </a>
                     </div>
-
                     <div className="header-right">
                         <div className="login">
                             <a href='#'>
@@ -135,14 +134,12 @@ export default function Main() {
                                 Sign In
                             </a>
                         </div>
-
                         <button onClick={toggleMenu} className="chopsticks" ref={chopsticksRef}>
                             <span></span>
                             <span></span>
                             <span></span>
                         </button>
                     </div>
-
                 </div>
             </header>
 
@@ -253,9 +250,7 @@ export default function Main() {
                             role="tabpanel"
                             aria-labelledby="slide1-tab"
                         >
-                            <img
-                                src={b}
-                                alt="People experiencing Korean culture"
+                            <img src={b} alt="People experiencing Korean culture"
                             />
                             <div className="slide-content">
                                 <h2>Sharing Stories, Building Bridges</h2>
