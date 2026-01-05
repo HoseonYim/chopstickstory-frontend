@@ -3,20 +3,29 @@ import './App.css';
 import { Routes, Route, Link } from 'react-router-dom';
 import About from './pages/About';
 import Main from './Main.js';
-import Login from './Login';
+import Login from './Login.js';
+import Event from './Event.js'
+import Signup from './Signup.js'
 
 function App() {
     return (
         <div className="App">
             {/* Navigation Links (optional, but useful) */}
             <nav>
-                <Link to="/">Home</Link> | <Link to="/about">About</Link>
+                <Link to="/">Home</Link> | 
+                <Link to="/about">About</Link> |
+                <Link to="/login">Login</Link>
+                <Link to="/event">Event</Link>
+                <Link to="/signup">Event</Link>
             </nav>
 
             {/* Define the routes */}
             <Routes>
-                <Route path="/" element={<Login />} />
+                <Route path="/" element={<Main />} />
                 <Route path="/about" element={<About />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/event" element={<Event />} />
+                <Route path="/signup" element={<Signup />} />
             </Routes>
         </div>
         // <div className="App">
