@@ -1,0 +1,504 @@
+/* 원본 디자인 기준: 1650px 너비, 전체 높이를 화면에 맞게 조정 */
+
+.mypage-page {
+    position: fixed; /* relative 대신 fixed로 변경 */
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    margin-top: var(--header-height);
+    overflow: hidden; /* 모든 스크롤 제거 */
+    box-sizing: border-box;
+}
+
+.mypage-container {
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0 3rem; /* 원본 left: 39px 기준 */
+    box-sizing: border-box;
+    overflow-x: hidden;
+    overflow-y: hidden; /* 세로 스크롤바 제거 */
+    height: calc(100vh - var(--header-height)); /* min-height 대신 height로 고정 */
+}
+
+/* Fixed Top Section - Header 아래 고정 */
+.mypage-top-section {
+    position: fixed;
+    top: var(--header-height);
+    left: 0;
+    right: 0;
+    width: 100%;
+    padding: 1rem 5rem;
+    background: #FFFFFF;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+/* HI! USER - 원본: top 105px, font-size 96px */
+.mypage-greeting {
+    position: relative;
+    font-family: 'Koulen', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 3rem; /* 20% 축소 */
+    line-height: 1.8; /* 원본 173px/96px = 1.8 */
+    letter-spacing: 0.05em;
+    color: #000000;
+    margin: 0;
+    padding-left: 1rem;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+/* VOLUNTEER Header */
+.mypage-volunteer-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.2rem;
+    padding: 0 1.5rem;
+    margin-top: 0.5rem; /* 아래로 이동 */
+}
+
+/* VOLUNTEER - 원본: top 178px, font-size 48px */
+.mypage-volunteer-title {
+    font-family: 'Arial', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 2rem; /* 20% 축소 */
+    line-height: 1.15; /* 원본 55px/48px = 1.15 */
+    color: #5E5E5E;
+    margin: 0;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+/* Arrow - 원본: left 1569px, top 193px, width 35px, height 24px, border 6px */
+.mypage-arrow {
+    width: 1rem;
+    height: 1rem;
+    border: 0.25rem solid #5E5E5E;
+    border-top: none;
+    border-left: none;
+    padding: 0.5rem 0 0 0.5rem;
+    transform: rotate(45deg) translateY(-0.5rem); /* rotate와 함께 translateY로 위로 이동 */
+    box-sizing: border-box;
+    flex-shrink: 0;
+    align-self: center;
+    margin: auto 0; /* 상하 중앙 정렬 */
+}
+
+/* Lines - 원본: width 1650px, left 39px */
+.line {
+    position: absolute;
+    width: calc(100% - 6rem); /* padding 제외 */
+    height: 0;
+    left: 3rem;
+    border: 0.125rem solid #000000;
+    z-index: 10; /* Top section 위에 표시되도록 */
+}
+
+/* Top Lines - 원본: top 278px, 291px */
+.line-top-1 {
+    top: 12vh;
+}
+
+.line-top-2 {
+    top: 13vh;
+}
+
+/* Bottom Lines - 원본: top 1345px, 1358px */
+.line-bottom-1 {
+    top: 87vh; /* 화면에 맞게 더 낮춤 */
+}
+
+.line-bottom-2 {
+    top: 88vh; /* 화면에 맞게 더 낮춤 */
+}
+
+/* Left Section - User Info */
+.mypage-left-section {
+    position: absolute;
+    left: 3rem; /* 원본 left: 89px 기준 */
+    top: 14vh; /* Top line 아래 */
+    padding: 0 1.5rem;
+    width: 45%; /* width 증가 */
+    max-width: 40rem; /* max-width 증가 */
+    max-height: calc(82vh - 14vh); /* Bottom line 위까지 */
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    overflow: visible; /* 내용이 보이도록 */
+    box-sizing: border-box;
+}
+
+.mypage-section {
+    position: relative;
+    margin-top: 3vh;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    text-align: left;
+}
+
+/* PARTICIPATION TIME - 원본: top 361px, font-size 50px */
+.mypage-record-text {
+    position: relative;
+    font-family: 'Koulen', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 2.431rem; /* 20% 축소 */
+    line-height: 1.8; /* 원본 90px/50px = 1.8 */
+    letter-spacing: 0.05em;
+    color: #000000;
+    margin-bottom: 1.2vh;
+    white-space: nowrap; /* 한 줄로 유지 */
+    min-width: fit-content; /* 내용에 맞게 최소 너비 */
+}
+
+.mypage-record {
+    position: relative;
+    display: flex;
+    align-items: baseline;
+    flex-wrap: nowrap; /* 줄바꿈 방지 */
+    gap: 1rem;
+    min-width: fit-content; /* 내용에 맞게 최소 너비 */
+}
+
+/* 240 - 원본: top 443px, font-size 96px */
+.mypage-time-value {
+    font-family: 'Encode Sans SC', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 4.669rem; /* 20% 축소 */
+    line-height: 1.25; /* 원본 120px/96px = 1.25 */
+    letter-spacing: 0.05em;
+    color: #000000;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+/* hr - 원본: top 485px, font-size 40px */
+.mypage-time-unit {
+    font-family: 'Arial', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 1.25rem; /* 20% 축소 */
+    line-height: 1.15; /* 원본 46px/40px = 1.15 */
+    color: #000000;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+/* 30 - 원본: top 783px, font-size 96px */
+.mypage-number-value {
+    position: relative;
+    font-family: 'Encode Sans SC', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 4.669rem; /* 20% 축소 */
+    line-height: 1.25; /* 원본 120px/96px = 1.25 */
+    letter-spacing: 0.05em;
+    color: #000000;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+/* time - 원본: top 845px, font-size 40px */
+.mypage-time-text {
+    position: relative;
+    font-family: 'Arial', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 1.25rem; /* 20% 축소 */
+    line-height: 1.15; /* 원본 46px/40px = 1.15 */
+    color: #000000;
+    margin-top: 0.5vh;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+/* Right Section - History */
+.mypage-right-section {
+    position: absolute;
+    right: 3rem;
+    top: 14vh; /* Top line 아래 */
+    width: 45%;
+    max-width: 37.5rem;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    padding: 0 1.5rem;
+}
+
+/* History Box - 원본: left 864px, top 341px, width 767px, height 941px, border-radius 40px */
+.mypage-history-box {
+    position: absolute;
+    width: calc(100% - 3rem); /* 부모 padding(1.5rem * 2) 제외 */
+    left: 1.5rem; /* 부모 padding만큼 오프셋 */
+    top: 1.5rem;
+    height: calc(82vh - 14vh - 0.5vh); /* Bottom line 위까지 - 여백 조정 */
+    max-height: calc(100vh - var(--header-height) - 14vh - 0.5vh); /* 화면 높이 제한 */
+    background: #D8D8D8;
+    border-radius: 2.5rem; /* 원본 40px 기준 */
+    padding: 1.5vh 2rem;
+    box-sizing: border-box;
+    overflow-y: auto;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+/* HISTORY - 원본: top 361px, font-size 50px */
+.mypage-history-title {
+    position: relative;
+    font-family: 'Koulen', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 1.4rem; /* 20% 축소 */
+    line-height: 1.8; /* 원본 90px/50px = 1.8 */
+    text-align: left;
+    letter-spacing: 0.05em;
+    color: #000000;
+    margin: 0 0 2vh 0;
+    padding-bottom: 0.7rem;
+    padding-left: 0.7rem;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    flex-shrink: 0;
+    border-bottom: 0.125rem solid #7C7C7C;
+}
+
+/* History Header Line - 원본: left 889px, top 451px, width 707px */
+.mypage-history-header {
+    position: relative;
+    width: 100%;
+    height: 0;
+    margin: 1.5vh 0;
+    display: flex;
+    justify-content: space-between;
+    padding: 0;
+    flex-shrink: 0;
+}
+
+/* EVENT, DATE - 원본: top 458px, font-size 35px */
+.mypage-history-header-item {
+    position: relative;
+    font-family: 'Koulen', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 1.1rem; /* 20% 축소 */
+    line-height: 1.8; /* 원본 63px/35px = 1.8 */
+    letter-spacing: 0.05em;
+    color: #4F4F4F;
+    margin-top: -1.5vh;
+    background: #D8D8D8;
+    padding: 0 1rem;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+.mypage-history-list {
+    position: relative;
+    width: 100%;
+    padding: 0;
+    box-sizing: border-box;
+    margin-top: 2vh;
+    flex: 1;
+    overflow-y: auto;
+    min-height: 0;
+}
+
+/* History Items - 원본: width 707px, height 93px, border-radius 25px */
+.mypage-history-item {
+    position: relative;
+    width: 100%;
+    min-height: 5vh; /* 원본 93px 기준으로 화면에 맞게 */
+    border-radius: 1.5rem; /* 원본 25px 기준 */
+    margin: 0 0 1vh 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding: 1.5vh 2rem;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.mypage-history-item-light {
+    background: #EFEFEF;
+}
+
+.mypage-history-item-dark {
+    background: #D8D8D8;
+}
+
+/* Event name, Date - 원본: font-size 24px */
+.mypage-history-event-name,
+.mypage-history-event-date {
+    font-family: 'Arial', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 0.9rem; /* 20% 축소 */
+    line-height: 1.17; /* 원본 28px/24px = 1.17 */
+    color: #5E5E5E;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    flex: 1;
+    min-width: 0;
+}
+
+.mypage-history-event-name {
+    text-align: left;
+}
+
+.mypage-history-event-date {
+    text-align: right;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .mypage-page {
+        margin-top: var(--header-height-mobile);
+    }
+    
+    .mypage-top-section {
+        top: var(--header-height-mobile);
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1vh;
+        padding: 2vh 4vw;
+    }
+    
+    .mypage-container {
+        padding: 0 4vw;
+    }
+    
+    .mypage-left-section {
+        position: relative;
+        width: 100%;
+        max-width: 100%;
+        left: 0;
+        top: 18vh;
+        margin-bottom: 4vh;
+    }
+    
+    .mypage-right-section {
+        position: relative;
+        width: 100%;
+        right: 0;
+        top: 0;
+        max-width: 100%;
+    }
+    
+    .mypage-history-box {
+        position: relative;
+        width: 100%;
+        min-height: auto;
+        max-height: none;
+        left: 0;
+        top: 0;
+        bottom: auto;
+        height: auto;
+        padding: 3vh 4vw;
+        margin-top: 2vh;
+    }
+    
+    .line {
+        display: none;
+    }
+    
+    .mypage-greeting {
+        font-size: 2rem; /* 20% 축소 */
+    }
+    
+    .mypage-time-value,
+    .mypage-number-value {
+        font-size: 2rem; /* 20% 축소 */
+    }
+    
+    .mypage-time-unit,
+    .mypage-time-text {
+        font-size: 1rem; /* 20% 축소 */
+    }
+    
+    .mypage-volunteer-header {
+        font-size: 2.5rem; /* 25% 증가 */
+    }
+    .mypage-volunteer-title {
+        font-size: 3.75rem; /* 25% 증가 */
+    }
+    
+    .mypage-arrow {
+        width: 1.5625rem; /* 25% 증가 (1.25rem * 1.25) */
+        height: 1.09375rem; /* 25% 증가 (0.875rem * 1.25) */
+        border-width: 0.234375rem; /* 25% 증가 (0.1875rem * 1.25) */
+    }
+    
+    .mypage-history-title {
+        font-size: 1.2rem; /* 20% 축소 */
+        margin-bottom: 3vh;
+    }
+    
+    .mypage-history-header-item {
+        font-size: 0.9rem; /* 20% 축소 */
+    }
+    
+    .mypage-history-event-name,
+    .mypage-history-event-date {
+        font-size: 0.8rem; /* 20% 축소 */
+    }
+    
+    .mypage-history-item {
+        min-height: 6vh;
+        padding: 1.5vh 3vw;
+        margin-bottom: 1.5vh;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .mypage-history-event-date {
+        text-align: left;
+        margin-top: 0.5vh;
+    }
+}
+
+/* Small Mobile Devices */
+@media (max-width: 480px) {
+    .mypage-greeting {
+        font-size: 1.75rem; /* 20% 축소 */
+    }
+    
+    .mypage-time-value,
+    .mypage-number-value {
+        font-size: 1.75rem; /* 20% 축소 */
+    }
+    
+    .mypage-time-unit,
+    .mypage-time-text {
+        font-size: 0.875rem; /* 20% 축소 */
+    }
+    
+    .mypage-volunteer-title {
+        font-size: 1.1rem; /* 20% 축소 */
+    }
+    
+    .mypage-history-title {
+        font-size: 1.1rem; /* 20% 축소 */
+    }
+    
+    .mypage-history-header-item {
+        font-size: 0.8rem; /* 20% 축소 */
+    }
+    
+    .mypage-history-event-name,
+    .mypage-history-event-date {
+        font-size: 0.75rem; /* 20% 축소 */
+    }
+}

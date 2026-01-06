@@ -4,8 +4,9 @@ import { Routes, Route, Link } from 'react-router-dom';
 import About from './pages/About';
 import Main from './Main.js';
 import Login from './Login.js';
-import Event from './Event.js'
-import Signup from './Signup.js'
+import Event from './Event.js';
+import Signup from './Signup.js';
+import Mypage from './Mypage.js';
 
 function App() {
     return (
@@ -16,15 +17,17 @@ function App() {
                 <Link to="/about">About</Link> |
                 <Link to="/login">Login</Link>
                 <Link to="/event">Event</Link>
-                <Link to="/signup">Event</Link>
+                <Link to="/mypage">Mypage</Link>
+                <Link to="/signup">Signup</Link>
             </nav>
 
             {/* Define the routes */}
             <Routes>
-                <Route path="/" element={<Main />} />
+                <Route path="/" element={<Mypage />} />
                 <Route path="/about" element={<About />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/event" element={<Event />} />
+                <Route path="/mypage" element={<Mypage />} />
                 <Route path="/signup" element={<Signup />} />
             </Routes>
         </div>
