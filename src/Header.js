@@ -203,7 +203,7 @@ export default function Header() {
                                 About CHOPSTICKSTORY
                             </Link>
                             <Link to="/about#team-section">Our Team</Link>
-                            {/* <Link to="/project">Our Project</Link> */}
+                            <Link to="/project">Our Project</Link>
                             {/* Relocate the project location */}
                         </div>
                     </div>
@@ -247,13 +247,13 @@ export default function Header() {
                         </div>
                     </div>
 
-                    <div className="dropdown">
+                    {/* <div className="dropdown">
                         <div className="dropdown-header">
                             <Link to="/project" className="menu-link">
                                 Projects
                             </Link>
                         </div>
-                    </div>
+                    </div> */}
 
                 </div>
                 <div className="social-links">
