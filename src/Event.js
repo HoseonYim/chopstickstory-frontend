@@ -1,6 +1,7 @@
 import React from 'react';
 import backgroundImage from './assets/Sample/adrien-bruneau-8cpR_Yf0rQs-unsplash.jpg';
-import './Event.css';
+import { useNavigate } from "react-router-dom";
+import './styles.css';
 import Header from './Header';
 
 export default function Event() {
@@ -40,19 +41,25 @@ export default function Event() {
         },
     ];
 
-    const eventList = events.map((i) => (
-        <li key={i.id} className="event-card">
-            <div class="image-section">
-                <img src={i.imageId} alt={i.name} />
-                <div class="date-badge">26</div>
-            </div>
-            <div class="content-section">
-                <div className="title">{i.name}</div>
-                <div class="description">{i.description}</div>
-                <div class="time">{i.time}</div>
+    const navigate = useNavigate(); 
+    const routeChange = (eventId) => { 
+      const path = `/event/detail/${eventId}`; 
+      navigate(path);
+    }
 
-                <div class="arrow-container">
-                    <span class="arrow"></span>
+    const eventList = events.map((i) => (
+        <li key={i.id} className="event-card" onClick={() => routeChange(i.id)}>
+            <div className="image-section">
+                <img src={i.imageId} alt={i.name} />
+                <div className="date-badge">26</div>
+            </div>
+            <div className="content-section">
+                <div className="title">{i.name}</div>
+                <div className="description">{i.description}</div>
+                <div className="time">{i.time}</div>
+
+                <div className="arrow-container">
+                    <span className="arrow"></span>
                 </div>
             </div>
         </li>

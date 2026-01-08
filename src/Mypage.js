@@ -1,6 +1,6 @@
 import React from 'react';
 import './variables.css';
-import './Mypage.css';
+import './styles.css';
 import Header from './Header';
 
 export default function Mypage() {

@@ -2,7 +2,7 @@
 @import "variables.css";
 
 /* Components */
-@import "components/screen-header.css";
+/* @import "components/screen-header.css"; */
 @import "components/socialmedia.css";
 @import "components/footer.css";
 
@@ -10,6 +10,8 @@
 @import "screens/about.css";
 @import "screens/programs.css";
 @import "screens/project.css";
+@import "screens/Event.css";
+@import "screens/Mypage.css";
 
 /* Main Content Styles */
 main {
@@ -325,6 +327,160 @@ main {
     background: #c9c9c9;
 }
 
+/* Forgot Password 특화 스타일 - 위치/크기만 지정 */
+.forgot-password-widget {
+    height: 41.901rem; /* 739px * 0.9 - login과 동일 */
+    left: 8.757rem; /* 119px - login과 동일 */
+    top: 6.5rem; /* 204px - login과 동일 */
+    padding: 2.608rem 1.531rem 0;
+}
+
+.forgot-password-logo {
+    width: 7.088rem; /* 125px * 0.9 - login과 동일 */
+    height: 7.088rem; /* 125px * 0.9 - login과 동일 */
+}
+
+.forgot-password-title {
+    width: 100%;
+    max-width: 15.989rem; /* 282px * 0.9 */
+    font-family: 'Arial', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 1.814rem; /* 32px * 0.9 */
+    line-height: 2.098rem; /* 37px * 0.9 */
+    color: #515151;
+    margin: 0 0 1rem 0;
+    padding: 0;
+    text-align: center;
+    z-index: 4;
+}
+
+.forgot-password-description {
+    width: 100%;
+    max-width: 20rem;
+    font-family: 'Arial', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 0.907rem; /* 16px * 0.9 */
+    line-height: 1.304rem; /* 23px * 0.9 */
+    color: #959595;
+    margin: 0 0 1.5rem 0;
+    padding: 0;
+    text-align: center;
+    z-index: 4;
+}
+
+.forgot-password-button {
+    position: relative;
+    width: 100%;
+    max-width: 24.211rem; /* 427px * 0.9 */
+    height: 2.665rem; /* 47px * 0.9 */
+    background: #2D2D2C;
+    border: 0.063rem solid #292929; /* 1px */
+    border-radius: 0.624rem; /* 11px * 0.9 */
+    font-family: 'Arial', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 1.134rem; /* 20px * 0.9 */
+    line-height: 1.304rem; /* 23px * 0.9 */
+    color: #FFFFFF;
+    cursor: pointer;
+    padding: 0;
+    margin: 1rem 0;
+    box-sizing: border-box;
+}
+
+.forgot-password-button:hover {
+    background: #3a3a39;
+}
+
+.forgot-password-login-link {
+    margin-top: 1rem;
+    text-align: center;
+    z-index: 4;
+}
+
+.forgot-password-login-link .auth-link {
+    color: #8383FF;
+}
+
+/* Reset Password 특화 스타일 - 위치/크기만 지정 */
+.reset-password-widget {
+    height: 41.901rem; /* 739px * 0.9 - login과 동일 */
+    left: 8.757rem; /* 119px - login과 동일 */
+    top: 6.5rem; /* 204px - login과 동일 */
+    padding: 2.608rem 1.531rem 0;
+}
+
+.reset-password-logo {
+    width: 7.088rem; /* 125px * 0.9 - login과 동일 */
+    height: 7.088rem; /* 125px * 0.9 - login과 동일 */
+}
+
+.reset-password-title {
+    width: 100%;
+    max-width: 15.989rem; /* 282px * 0.9 */
+    font-family: 'Arial', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 1.814rem; /* 32px * 0.9 */
+    line-height: 2.098rem; /* 37px * 0.9 */
+    color: #515151;
+    margin: 0 0 1rem 0;
+    padding: 0;
+    text-align: center;
+    z-index: 4;
+}
+
+.reset-password-description {
+    width: 100%;
+    max-width: 20rem;
+    font-family: 'Arial', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 0.907rem; /* 16px * 0.9 */
+    line-height: 1.304rem; /* 23px * 0.9 */
+    color: #959595;
+    margin: 0 0 1.5rem 0;
+    padding: 0;
+    text-align: center;
+    z-index: 4;
+}
+
+.reset-password-button {
+    position: relative;
+    width: 100%;
+    max-width: 24.211rem; /* 427px * 0.9 */
+    height: 2.665rem; /* 47px * 0.9 */
+    background: #2D2D2C;
+    border: 0.063rem solid #292929; /* 1px */
+    border-radius: 0.624rem; /* 11px * 0.9 */
+    font-family: 'Arial', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 1.134rem; /* 20px * 0.9 */
+    line-height: 1.304rem; /* 23px * 0.9 */
+    color: #FFFFFF;
+    cursor: pointer;
+    padding: 0;
+    margin: 1rem 0;
+    box-sizing: border-box;
+}
+
+.reset-password-button:hover {
+    background: #3a3a39;
+}
+
+.reset-password-login-link {
+    margin-top: 1rem;
+    text-align: center;
+    z-index: 4;
+}
+
+.reset-password-login-link .auth-link {
+    color: #8383FF;
+}
+
 /* Mobile Responsive Styles - Auth 공통 */
 @media (max-width: 768px) {
     /* 공통 Auth Mobile Styles */
@@ -516,6 +672,86 @@ main {
         height: 2.8rem;
         font-size: 0.95rem;
     }
+    
+    /* Forgot Password 특화 Mobile */
+    .forgot-password-widget {
+        min-height: auto;
+        padding: 1.8rem 1.2rem 1.5rem;
+    }
+    
+    .forgot-password-logo {
+        width: 6rem;
+        height: 6rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .forgot-password-title {
+        position: relative;
+        top: 0;
+        left: 0;
+        transform: none;
+        width: 100%;
+        max-width: 100%;
+        text-align: center;
+        font-size: 1.4rem;
+        line-height: 1.6rem;
+        margin: 0 0 0.8rem 0;
+    }
+    
+    .forgot-password-description {
+        position: relative;
+        width: 100%;
+        max-width: 100%;
+        font-size: 0.85rem;
+        line-height: 1.2rem;
+        margin: 0 0 1.2rem 0;
+    }
+    
+    .forgot-password-login-link {
+        position: relative;
+        margin-top: 0.8rem;
+        font-size: 0.75rem;
+    }
+    
+    /* Reset Password 특화 Mobile */
+    .reset-password-widget {
+        min-height: auto;
+        padding: 1.8rem 1.2rem 1.5rem;
+    }
+    
+    .reset-password-logo {
+        width: 6rem;
+        height: 6rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .reset-password-title {
+        position: relative;
+        top: 0;
+        left: 0;
+        transform: none;
+        width: 100%;
+        max-width: 100%;
+        text-align: center;
+        font-size: 1.4rem;
+        line-height: 1.6rem;
+        margin: 0 0 0.8rem 0;
+    }
+    
+    .reset-password-description {
+        position: relative;
+        width: 100%;
+        max-width: 100%;
+        font-size: 0.85rem;
+        line-height: 1.2rem;
+        margin: 0 0 1.2rem 0;
+    }
+    
+    .reset-password-login-link {
+        position: relative;
+        margin-top: 0.8rem;
+        font-size: 0.75rem;
+    }
 }
 
 /* Small Mobile Devices */
@@ -591,6 +827,26 @@ main {
     .auth-divider-text,
     .signup-divider-text {
         font-size: 0.7rem;
+    }
+    
+    .forgot-password-title,
+    .reset-password-title {
+        font-size: 1.2rem;
+        line-height: 1.4rem;
+        margin: 0 0 0.6rem 0;
+    }
+    
+    .forgot-password-description,
+    .reset-password-description {
+        font-size: 0.75rem;
+        line-height: 1.1rem;
+        margin: 0 0 1rem 0;
+    }
+    
+    .forgot-password-login-link,
+    .reset-password-login-link {
+        font-size: 0.7rem;
+        margin-top: 0.6rem;
     }
 }
 

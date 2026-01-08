@@ -30,12 +30,12 @@
     left: 0;
     right: 0;
     width: 100%;
-    padding: 1rem 5rem;
+    padding: 1.7rem 5rem;
     background: #FFFFFF;
     z-index: 100;
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-end;
     box-sizing: border-box;
 }
 
@@ -45,14 +45,18 @@
     font-family: 'Koulen', sans-serif;
     font-style: normal;
     font-weight: 400;
-    font-size: 3rem; /* 20% 축소 */
-    line-height: 1.8; /* 원본 173px/96px = 1.8 */
+    font-size: 3.5rem; /* 20% 축소 */
+    line-height: 1; /* 원본 173px/96px = 1.8 */
     letter-spacing: 0.05em;
     color: #000000;
     margin: 0;
     padding-left: 1rem;
     word-wrap: break-word;
     overflow-wrap: break-word;
+    padding-top: 0.5rem;
+    display: flex;
+    align-items: flex-end;
+    align-self: flex-end;
 }
 
 /* VOLUNTEER Header */
@@ -62,7 +66,8 @@
     justify-content: space-between;
     gap: 1.2rem;
     padding: 0 1.5rem;
-    margin-top: 0.5rem; /* 아래로 이동 */
+    margin-top: 0rem; /* 아래로 이동 */
+    align-self: flex-end;
 }
 
 /* VOLUNTEER - 원본: top 178px, font-size 48px */

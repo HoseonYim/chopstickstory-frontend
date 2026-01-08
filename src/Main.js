@@ -1,12 +1,13 @@
 import './styles.css';
-import a from './assets/STAMP-LOGO.webp';
 import b from './assets/Sample/toa-heftiba-6bKpHAun4d8-unsplash.jpg';
 import c from './assets/STAMP-LOGO.webp';
 import d from './assets/Sample/adam-jang-8pOTAtyd_Mc-unsplash.jpg';
 import e from './assets/Sample/adrien-bruneau-8cpR_Yf0rQs-unsplash.jpg';
 import f from './assets/Sample/luca-upper-Z-4kOr93RCI-unsplash.jpg';
-import React, { useEffect } from 'react';
-import { useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
+import Header from './Header';
+import Footer from './components/Footer';
 
 export function useMetadata(metadata) {
     useEffect(() => {
@@ -91,25 +92,305 @@ export default function Main() {
         ogUrl: 'https://theolee021.github.io/ChopstickStory/',
     });
 
+    // Slider refs and state
+    const sliderContainerRef = useRef(null);
+    const sliderWrapperRef = useRef(null);
+    const barsRef = useRef([]);
+    const [currentSlide, setCurrentSlide] = useState(1);
+    const autoSlideIntervalRef = useRef(null);
+    const AUTO_SLIDE_INTERVAL = 3000;
 
-    const chopsticksRef = useRef(null);
-    const navRef = useRef(null);
-    const overlayRef = useRef(null);
+    // Setup infinite slider
+    useEffect(() => {
+        const sliderContainer = sliderContainerRef.current;
+        if (!sliderContainer) return;
 
+        const setupInfiniteSlider = () => {
+            // Remove existing clones if any
+            const existingClones = sliderContainer.querySelectorAll('[id$="-clone"]');
+            existingClones.forEach(clone => clone.remove());
 
-    function toggleMenu() {
-        if(chopsticksRef.current) {
-            chopsticksRef.current.classList.toggle('active');
+            // Get slides after removing clones
+            const slides = Array.from(sliderContainer.children);
+            if (slides.length === 0) return;
+
+            // Store reference to first slide before cloning
+            const firstSlide = slides[0];
+            const lastSlide = slides[slides.length - 1];
+
+            // Verify nodes are still children of container
+            if (!sliderContainer.contains(firstSlide) || !sliderContainer.contains(lastSlide)) {
+                return;
+            }
+
+            const firstSlideClone = firstSlide.cloneNode(true);
+            const lastSlideClone = lastSlide.cloneNode(true);
+            
+            firstSlideClone.id = 'slide1-clone';
+            lastSlideClone.id = `slide${slides.length}-clone`;
+            
+            // Append last clone to end
+            sliderContainer.appendChild(firstSlideClone);
+            
+            // Insert first clone before first slide (verify firstSlide is still a child)
+            if (sliderContainer.contains(firstSlide)) {
+                sliderContainer.insertBefore(lastSlideClone, firstSlide);
+            } else {
+                // Fallback: prepend if insertBefore fails
+                sliderContainer.insertBefore(lastSlideClone, sliderContainer.firstChild);
+            }
+            
+            // Initialize slider position to first real slide
+            const slideWidth = sliderContainer.clientWidth;
+            sliderContainer.scrollLeft = slideWidth;
+        };
+
+        // Wait for images to load
+        const handleLoad = () => {
+            setupInfiniteSlider();
+        };
+
+        if (document.readyState === 'complete') {
+            setTimeout(setupInfiniteSlider, 100);
+        } else {
+            window.addEventListener('load', handleLoad);
+            return () => {
+                window.removeEventListener('load', handleLoad);
+            };
         }
-        if (navRef.current) {
-            navRef.current.classList.toggle('active')
+    }, []);
+
+    // Update slider bars
+    const updateBars = (slideNumber) => {
+        barsRef.current.forEach((bar, index) => {
+            if (bar) {
+                if (index + 1 === slideNumber) {
+                    bar.classList.add('active');
+                } else {
+                    bar.classList.remove('active');
+                }
+            }
+        });
+    };
+
+    // Handle infinite scroll
+    useEffect(() => {
+        const sliderContainer = sliderContainerRef.current;
+        if (!sliderContainer) return;
+
+        const handleScroll = () => {
+            const slideWidth = sliderContainer.clientWidth;
+            const maxScroll = sliderContainer.scrollWidth - slideWidth;
+            
+            // If we're at the clone of the last slide (beginning)
+            if (sliderContainer.scrollLeft === 0) {
+                sliderContainer.style.scrollBehavior = 'auto';
+                const slides = Array.from(sliderContainer.children).filter(
+                    slide => !slide.id || !slide.id.endsWith('-clone')
+                );
+                sliderContainer.scrollLeft = maxScroll - slideWidth;
+                setTimeout(() => {
+                    sliderContainer.style.scrollBehavior = 'smooth';
+                }, 10);
+                setCurrentSlide(slides.length);
+            }
+            // If we're at the clone of the first slide (end)
+            else if (sliderContainer.scrollLeft >= maxScroll - 10) {
+                sliderContainer.style.scrollBehavior = 'auto';
+                sliderContainer.scrollLeft = slideWidth;
+                setTimeout(() => {
+                    sliderContainer.style.scrollBehavior = 'smooth';
+                }, 10);
+                setCurrentSlide(1);
+            }
+            // Update current slide based on scroll position
+            else {
+                const slide = Math.round(sliderContainer.scrollLeft / slideWidth);
+                setCurrentSlide(slide);
+            }
+        };
+
+        sliderContainer.addEventListener('scroll', handleScroll);
+        return () => {
+            sliderContainer.removeEventListener('scroll', handleScroll);
+        };
+    }, []);
+
+    // Update bars when currentSlide changes
+    useEffect(() => {
+        updateBars(currentSlide);
+    }, [currentSlide]);
+
+    // Handle bar clicks
+    useEffect(() => {
+        const bars = barsRef.current;
+        const sliderContainer = sliderContainerRef.current;
+        if (!sliderContainer || bars.length === 0) return;
+
+        const handlers = [];
+
+        bars.forEach((bar, index) => {
+            if (bar) {
+                const slideNumber = index + 1;
+                const handleBarClick = () => {
+                    const slideWidth = sliderContainer.clientWidth;
+                    
+                    sliderContainer.scrollTo({
+                        left: slideWidth * slideNumber,
+                        behavior: 'smooth'
+                    });
+                    
+                    setCurrentSlide(slideNumber);
+                    updateBars(slideNumber);
+                    stopAutoSlide();
+                };
+                
+                handlers.push({ bar, handler: handleBarClick });
+                bar.addEventListener('click', handleBarClick);
+            }
+        });
+
+        return () => {
+            handlers.forEach(({ bar, handler }) => {
+                bar.removeEventListener('click', handler);
+            });
+        };
+    }, []);
+
+    // Auto slide functions
+    const startAutoSlide = () => {
+        stopAutoSlide();
+        const sliderContainer = sliderContainerRef.current;
+        if (!sliderContainer) return;
+        
+        autoSlideIntervalRef.current = setInterval(() => {
+            const slideWidth = sliderContainer.clientWidth;
+            const maxScroll = sliderContainer.scrollWidth - slideWidth;
+            
+            if (sliderContainer.scrollLeft >= maxScroll - 10) {
+                sliderContainer.scrollTo({
+                    left: slideWidth,
+                    behavior: 'smooth'
+                });
+                setCurrentSlide(1);
+            } else {
+                sliderContainer.scrollTo({
+                    left: sliderContainer.scrollLeft + slideWidth,
+                    behavior: 'smooth'
+                });
+                setCurrentSlide(prev => prev + 1);
+            }
+        }, AUTO_SLIDE_INTERVAL);
+    };
+
+    const stopAutoSlide = () => {
+        if (autoSlideIntervalRef.current) {
+            clearInterval(autoSlideIntervalRef.current);
+            autoSlideIntervalRef.current = null;
         }
-        if (overlayRef.current) {
-            overlayRef.current.classList.toggle('active')
-        }
-    
-        document.body.style.overflow = navRef.current.classList.contains('active') ? 'hidden' : '';
-    }
+    };
+
+    // Auto slide controls
+    useEffect(() => {
+        const sliderWrapper = sliderWrapperRef.current;
+        const sliderContainer = sliderContainerRef.current;
+        if (!sliderWrapper || !sliderContainer) return;
+
+        const handleMouseEnter = () => stopAutoSlide();
+        const handleMouseLeave = () => {
+            setTimeout(startAutoSlide, 0);
+        };
+        const handleTouchStart = () => stopAutoSlide();
+        const handleTouchEnd = () => {
+            setTimeout(startAutoSlide, 0);
+        };
+
+        sliderWrapper.addEventListener('mouseenter', handleMouseEnter);
+        sliderWrapper.addEventListener('mouseleave', handleMouseLeave);
+        sliderWrapper.addEventListener('touchstart', handleTouchStart);
+        sliderWrapper.addEventListener('touchend', handleTouchEnd);
+
+        // Start auto slide
+        startAutoSlide();
+
+        return () => {
+            stopAutoSlide();
+            sliderWrapper.removeEventListener('mouseenter', handleMouseEnter);
+            sliderWrapper.removeEventListener('mouseleave', handleMouseLeave);
+            sliderWrapper.removeEventListener('touchstart', handleTouchStart);
+            sliderWrapper.removeEventListener('touchend', handleTouchEnd);
+        };
+    }, []);
+
+    // Load Instagram feed
+    useEffect(() => {
+        const loadBeholdFeed = async () => {
+            const BEHOLD_FEED_URL = 'https://feeds.behold.so/QmrH8sxjg7rmJixicWYy';
+            const instagramGrid = document.getElementById('instagram-grid');
+            
+            if (!instagramGrid) return;
+
+            try {
+                const response = await fetch(BEHOLD_FEED_URL);
+                const data = await response.json();
+                
+                instagramGrid.innerHTML = '';
+
+                // behold.json 구조에 맞게 데이터 추출
+                // posts 배열에 최대 6개 포스트만 표시
+                const posts = data.posts?.slice(0, 6) || [];
+                
+                posts.forEach(post => {
+                    // 미디어 URL 결정 (sizes.medium 또는 대체 이미지)
+                    let mediaUrl;
+                    if (post.mediaType === 'VIDEO' && post.thumbnailUrl) {
+                        // 비디오인 경우 썸네일 사용
+                        mediaUrl = post.thumbnailUrl;
+                    } else if (post.sizes && post.sizes.medium) {
+                        // medium 사이즈 이미지 사용
+                        mediaUrl = post.sizes.medium.mediaUrl;
+                    } else {
+                        // 기본 미디어 URL 사용
+                        mediaUrl = post.mediaUrl;
+                    }
+                    
+                    // 캡션 정리 (짧은 버전 사용)
+                    const caption = post.prunedCaption || post.caption || '';
+                    
+                    // 포스트 타입에 따른 아이콘 추가
+                    const isVideo = post.mediaType === 'VIDEO' || post.isReel;
+                    const icon = isVideo ? '<i class="fa-solid fa-play post-icon"></i>' : '';
+                    
+                    const postElement = document.createElement('a');
+                    postElement.href = post.permalink;
+                    postElement.target = '_blank';
+                    postElement.rel = 'noopener';
+                    postElement.className = `instagram-post ${isVideo ? 'video-post' : ''}`;
+                    postElement.innerHTML = `
+                        <img src="${mediaUrl}" alt="${caption ? caption.slice(0, 100) : 'Instagram post'}" loading="lazy">
+                        ${icon}
+                        <div class="post-overlay">
+                            <span class="post-likes">
+                                <i class="fa-solid fa-heart"></i>
+                            </span>
+                        </div>
+                    `;
+                    instagramGrid.appendChild(postElement);
+                });
+            } catch (error) {
+                console.error('Error loading Behold Instagram feed:', error);
+                // 에러 발생 시 대체 콘텐츠 표시
+                instagramGrid.innerHTML = `
+                    <div style="text-align: center; grid-column: 1/-1; padding: 2rem;">
+                        <p>Instagram 피드를 불러오는 중 문제가 발생했습니다.</p>
+                        <a href="https://www.instagram.com/chopstickstory/" target="_blank">Instagram에서 직접 보기</a>
+                    </div>
+                `;
+            }
+        };
+
+        loadBeholdFeed();
+    }, []);
 
     return (
         // <html lang="ko">
@@ -117,133 +398,16 @@ export default function Main() {
             {/* <title>CHOPSTICKSTORY - Celebrating Korean Culture</title> */}
             {/* <link rel="icon" type="image/webp" href="./images/cropped-cropped-CHOPSTICKSTORY-7.webp"> */}
             {/* <body> */}
-            <header>
-                <div className="header-content">
-                    <div className="logo">
-                        <a href="index.html">
-                            <img src={a} className="logo-img" />
-                            <p>CHOPSTICKSTORY</p>
-                        </a>
-                    </div>
-                    <div className="header-right">
-                        <div className="login">
-                            <a href='#'>
-                                Login
-                            </a>
-                            <a href='#'>
-                                Sign In
-                            </a>
-                        </div>
-                        <button onClick={toggleMenu} className="chopsticks" ref={chopsticksRef}>
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                        </button>
-                    </div>
-                </div>
-            </header>
-
-            <nav aria-label="Main navigation" ref={navRef}>
-                <div className="menu-links">
-                    <a href="index.html" aria-current="page">
-                        Home
-                    </a>
-
-                    <div className="dropdown">
-                        <div className="dropdown-header">
-                            <a href="about.html" className="menu-link">
-                                About Us
-                            </a>
-                            <button
-                                className="dropdown-trigger"
-                                aria-label="Toggle About Us dropdown"
-                            >
-                                <i
-                                    className="fa-solid fa-chevron-down"
-                                    aria-hidden="true"
-                                ></i>
-                            </button>
-                        </div>
-                        <div
-                            className="dropdown-menu"
-                            aria-label="About Us submenu"
-                        >
-                            <a href="about.html#org-intro">
-                                About CHOPSTICKSTORY
-                            </a>
-                            <a href="about.html#team-section">Our Team</a>
-                            <a href="project.html">Our Project</a>
-                        </div>
-                    </div>
-                    <div className="dropdown">
-                        <div className="dropdown-header">
-                            <a href="programs.html" className="menu-link">
-                                Programs
-                            </a>
-                            <button className="dropdown-trigger">
-                                <i className="fa-solid fa-chevron-down"></i>
-                            </button>
-                        </div>
-                        <div className="dropdown-menu">
-                            <a href="programs.html#mundam">
-                                MunDam: Infusing Culture
-                            </a>
-                            <a href="programs.html#yedam">
-                                YeDam: Infusing Art
-                            </a>
-                            <a href="programs.html#deokdam">
-                                DeokDam: Infusing Virtue
-                            </a>
-                            <a href="programs.html#chedam">
-                                CheDam: Infusing Experiences
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div className="social-links">
-                    <a
-                        href="https://www.instagram.com/chopstickstory/"
-                        title="Instagram"
-                        target="_blank"
-                    >
-                        <i className="fa-brands fa-instagram fa-xl"></i>
-                    </a>
-                    <a
-                        href="https://www.linkedin.com/company/chopstickstory/"
-                        title="Linkedin"
-                    >
-                        <i className="fa-brands fa-linkedin-in fa-xl"></i>
-                    </a>
-                    <a href="#" title="Youtube">
-                        <i className="fa-brands fa-youtube fa-xl"></i>
-                    </a>
-                </div>
-                <div className="external-links">
-                    <a href="mailto:info@chopstickstory.org" target="_blank">
-                        <i className="fa-regular fa-envelope"></i>
-                        Contact
-                        <i className="fa-solid fa-arrow-up-from-bracket"></i>
-                    </a>
-                    <a
-                        href="https://www.paypal.com/donate/?hosted_button_id=WZK3AX6WV9RMC"
-                        target="_blank"
-                    >
-                        <i className="fa-brands fa-paypal"></i>
-                        Donation
-                        <i className="fa-solid fa-arrow-up-from-bracket"></i>
-                    </a>
-                </div>
-            </nav>
-
-            <div className="overlay" ref={overlayRef}></div>
+            <Header />
 
             <main>
                 <div
                     className="slider-wrapper"
                     role="region"
                     aria-label="Image Slider"
+                    ref={sliderWrapperRef}
                 >
-                    <div className="slider-container">
+                    <div className="slider-container" ref={sliderContainerRef}>
                         <div
                             className="slide"
                             id="slide1"
@@ -258,10 +422,10 @@ export default function Main() {
                                     Join us in our journey to connect cultures
                                     through meaningful experiences.
                                 </p>
-                                <a href="about.html" className="slide-btn">
+                                <Link to="/about" className="slide-btn">
                                     About Us{' '}
                                     <i className="fa-solid fa-arrow-right"></i>
-                                </a>
+                                </Link>
                             </div>
                         </div>
                         <div className="slide" id="slide2">
@@ -272,10 +436,10 @@ export default function Main() {
                                     Experience the richness of Korean traditions
                                     through our diverse programs.
                                 </p>
-                                <a href="programs.html" className="slide-btn">
+                                <Link to="/programs" className="slide-btn">
                                     Our Programs{' '}
                                     <i className="fa-solid fa-arrow-right"></i>
-                                </a>
+                                </Link>
                             </div>
                         </div>
                         <div className="slide" id="slide3">
@@ -287,13 +451,13 @@ export default function Main() {
                                     contemporary narratives that showcase the
                                     wisdom and values.
                                 </p>
-                                <a
-                                    href="programs.html#mundam"
+                                <Link
+                                    to="/programs#mundam"
                                     className="slide-btn"
                                 >
                                     See More{' '}
                                     <i className="fa-solid fa-arrow-right"></i>
-                                </a>
+                                </Link>
                             </div>
                         </div>
                         <div className="slide" id="slide4">
@@ -305,10 +469,10 @@ export default function Main() {
                                     through various milestones and activities
                                     since 2019.
                                 </p>
-                                <a href="project.html" className="slide-btn">
+                                <Link to="/project" className="slide-btn">
                                     See More{' '}
                                     <i className="fa-solid fa-arrow-right"></i>
-                                </a>
+                                </Link>
                             </div>
                         </div>
                         <div className="slide" id="slide5">
@@ -319,22 +483,42 @@ export default function Main() {
                                     Experience the joy of Korean traditional
                                     games with friends and family.
                                 </p>
-                                <a
-                                    href="programs.html#chedam"
+                                <Link
+                                    to="/programs#chedam"
                                     className="slide-btn"
                                 >
                                     See More{' '}
                                     <i className="fa-solid fa-arrow-right"></i>
-                                </a>
+                                </Link>
                             </div>
                         </div>
                     </div>
                     <div className="slider-nav">
-                        <div className="slider-bar active" data-slide="1"></div>
-                        <div className="slider-bar" data-slide="2"></div>
-                        <div className="slider-bar" data-slide="3"></div>
-                        <div className="slider-bar" data-slide="4"></div>
-                        <div className="slider-bar" data-slide="5"></div>
+                        <div 
+                            className="slider-bar active" 
+                            data-slide="1"
+                            ref={el => barsRef.current[0] = el}
+                        ></div>
+                        <div 
+                            className="slider-bar" 
+                            data-slide="2"
+                            ref={el => barsRef.current[1] = el}
+                        ></div>
+                        <div 
+                            className="slider-bar" 
+                            data-slide="3"
+                            ref={el => barsRef.current[2] = el}
+                        ></div>
+                        <div 
+                            className="slider-bar" 
+                            data-slide="4"
+                            ref={el => barsRef.current[3] = el}
+                        ></div>
+                        <div 
+                            className="slider-bar" 
+                            data-slide="5"
+                            ref={el => barsRef.current[4] = el}
+                        ></div>
                     </div>
                 </div>
             </main>
@@ -385,91 +569,7 @@ export default function Main() {
                 </div>
             </section>
 
-            <footer>
-                <div className="footer-content">
-                    {/* <!-- 사이트맵 섹션 추가 --> */}
-                    <div className="footer-sitemap">
-                        <div className="sitemap-column">
-                            <h3>
-                                <a href="about.html">About Us</a>
-                            </h3>
-                            <ul>
-                                <li>
-                                    <a href="about.html#org-intro">
-                                        About CHOPSTICKSTORY
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="about.html#team-section">
-                                        Our Team
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="project.html">Our Project</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div className="sitemap-column">
-                            <h3>
-                                <a href="programs.html">Programs</a>
-                            </h3>
-                            <ul>
-                                <li>
-                                    <a href="programs.html#mundam">
-                                        MunDam: Infusing Culture
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="programs.html#yedam">
-                                        YeDam: Infusing Art
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="programs.html#deokdam">
-                                        DeokDam: Infusing Virtue
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="programs.html#chedam">
-                                        CheDam: Infusing Experiences
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div className="sitemap-column">
-                            <h3>Connect</h3>
-                            <ul>
-                                <li>
-                                    <a href="mailto:info@chopstickstory.org">
-                                        Contact Us
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="https://www.paypal.com/donate/?hosted_button_id=WZK3AX6WV9RMC">
-                                        Donate
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    {/* <!-- 기존 푸터 콘텐츠 --> */}
-                    <div className="footer-grid">
-                        <div className="org-info">
-                            <h3>CHOPSTICKSTORY</h3>
-                            <p>
-                                A 501(c)(3) nonprofit organization | EIN:
-                                99-0860654 | Address: 20570 Shady Oak Ln,
-                                Cupertino, CA | Phone: (607) 973-0750 | Email:
-                                info@chopstickstory.org
-                            </p>
-                        </div>
-                    </div>
-                    <div className="copyright">
-                        <p>&copy; 2025 CHOPSTICKSTORY. All rights reserved.</p>
-                    </div>
-                </div>
-            </footer>
+            <Footer />
             {/* <script src="https://kit.fontawesome.com/b3f4de9307.js" 
             crossorigin="anonymous"></script>
             <script src="js/main.js"></script>

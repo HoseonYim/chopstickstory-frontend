@@ -1,12 +1,13 @@
-import logo from './logo.svg';
 import './App.css';
 import { Routes, Route, Link } from 'react-router-dom';
 import About from './pages/About';
+import Programs from './pages/Programs';
+import Project from './pages/Project';
 import Main from './Main.js';
-import Login from './Login.js';
+import Auth from './Auth.js';
 import Event from './Event.js';
-import Signup from './Signup.js';
 import Mypage from './Mypage.js';
+import Detail from './Detail.js';
 
 function App() {
     return (
@@ -15,20 +16,28 @@ function App() {
             <nav>
                 <Link to="/">Home</Link> | 
                 <Link to="/about">About</Link> |
-                <Link to="/login">Login</Link>
                 <Link to="/event">Event</Link>
                 <Link to="/mypage">Mypage</Link>
+                <Link to="/login">Login</Link>
                 <Link to="/signup">Signup</Link>
+                <Link to="/forgot-password">Forgot Passwd</Link>
+                <Link to="/reset-password">Reset Passwd</Link>
+                <Link to="/event/detail">Event Detail</Link>
             </nav>
 
             {/* Define the routes */}
             <Routes>
-                <Route path="/" element={<Mypage />} />
+                <Route path="/" element={<Main />} />
                 <Route path="/about" element={<About />} />
-                <Route path="/login" element={<Login />} />
+                <Route path="/programs" element={<Programs />} />
+                <Route path="/project" element={<Project />} />
                 <Route path="/event" element={<Event />} />
                 <Route path="/mypage" element={<Mypage />} />
-                <Route path="/signup" element={<Signup />} />
+                <Route path="/login" element={<Auth />} /> 
+                <Route path="/signup" element={<Auth />} />
+                <Route path="/forgot-password" element={<Auth />} />
+                <Route path="/reset-password" element={<Auth />} />
+                <Route path="/event/detail" element={<Detail />} />
             </Routes>
         </div>
         // <div className="App">

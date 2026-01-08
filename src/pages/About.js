@@ -1,7 +1,9 @@
 import React, { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import '../styles/About.css';
 import '../styles/Footer.css';
 import Header from '../Header';
+import Footer from '../components/Footer';
 import a from '../assets/Sample/toa-heftiba-6bKpHAun4d8-unsplash.jpg';
 import b from '../assets/cropped-cropped-CHOPSTICKSTORY-7.webp';
 import c from '../assets/Sample/alex-alvarez-63YVMrL2d6g-unsplash.jpg';
@@ -18,6 +20,35 @@ import m from '../assets/Sample/jacqueline-munguia-1pAwJiCD60c-unsplash.jpg';
 import n from '../assets/Sample/yuyang-liu-VOV0q44b7R4-unsplash.jpg';
 
 export default function About() {
+    const location = useLocation();
+
+    // Handle hash scroll
+    useEffect(() => {
+        const scrollToHash = () => {
+            if (location.hash) {
+                const element = document.querySelector(location.hash);
+                if (element) {
+                    // Wait for page to render
+                    setTimeout(() => {
+                        const headerHeight = document.querySelector('header')?.offsetHeight || 0;
+                        const elementPosition = element.getBoundingClientRect().top;
+                        const offsetPosition = elementPosition + window.pageYOffset - headerHeight;
+
+                        window.scrollTo({
+                            top: offsetPosition,
+                            behavior: 'smooth'
+                        });
+                    }, 100);
+                }
+            } else {
+                // No hash, scroll to top
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        };
+
+        scrollToHash();
+    }, [location]);
+
     useEffect(() => {
         document.title = 'About Us - CHOPSTICKSTORY';
 
@@ -72,145 +103,6 @@ export default function About() {
     return (
         <div className="about-page">
             <Header />
-
-            <nav aria-label="Main navigation">
-                <div className="menu-links">
-                    <a href="/index.html">Home</a>
-
-                    <div className="dropdown">
-                        <div className="dropdown-header">
-                            <a
-                                href="/about.html"
-                                className="menu-link"
-                                aria-current="page"
-                            >
-                                About Us
-                            </a>
-                            <button
-                                className="dropdown-trigger"
-                                aria-label="Toggle About Us dropdown"
-                            >
-                                <i
-                                    className="fa-solid fa-chevron-down"
-                                    aria-hidden="true"
-                                ></i>
-                            </button>
-                        </div>
-                        <div
-                            className="dropdown-menu"
-                            aria-label="About Us submenu"
-                        >
-                            <a href="/about.html#org-intro">
-                                About CHOPSTICKSTORY
-                            </a>
-                            <a href="/about.html#team-section">Our Team</a>
-                            <a href="/project.html">Our Project</a>
-                        </div>
-                    </div>
-
-                    <div className="dropdown">
-                        <div className="dropdown-header">
-                            <a href="/programs.html" className="menu-link">
-                                Programs
-                            </a>
-                            <button
-                                className="dropdown-trigger"
-                                aria-label="Toggle Programs dropdown"
-                            >
-                                <i
-                                    className="fa-solid fa-chevron-down"
-                                    aria-hidden="true"
-                                ></i>
-                            </button>
-                        </div>
-                        <div className="dropdown-menu">
-                            <a href="/programs.html#mundam">
-                                MunDam: Infusing Culture
-                            </a>
-                            <a href="/programs.html#yedam">
-                                YeDam: Infusing Art
-                            </a>
-                            <a href="/programs.html#deokdam">
-                                DeokDam: Infusing Virtue
-                            </a>
-                            <a href="/programs.html#chedam">
-                                CheDam: Infusing Experiences
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <div className="social-links">
-                    <a
-                        href="https://www.instagram.com/chopstickstory/"
-                        title="Instagram"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                    >
-                        <i
-                            className="fa-brands fa-instagram fa-xl"
-                            aria-hidden="true"
-                        ></i>
-                    </a>
-                    <a
-                        href="https://www.linkedin.com/company/chopstickstory/"
-                        title="Linkedin"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                    >
-                        <i
-                            className="fa-brands fa-linkedin-in fa-xl"
-                            aria-hidden="true"
-                        ></i>
-                    </a>
-                    <a
-                        href="#"
-                        title="Youtube"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                    >
-                        <i
-                            className="fa-brands fa-youtube fa-xl"
-                            aria-hidden="true"
-                        ></i>
-                    </a>
-                </div>
-
-                <div className="external-links">
-                    <a
-                        href="mailto:info@chopstickstory.org"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                    >
-                        <i
-                            className="fa-regular fa-envelope"
-                            aria-hidden="true"
-                        ></i>
-                        Contact
-                        <i
-                            className="fa-solid fa-arrow-up-right"
-                            aria-hidden="true"
-                        ></i>
-                    </a>
-                    <a
-                        href="https://www.paypal.com/donate/?hosted_button_id=WZK3AX6WV9RMC"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                    >
-                        <i
-                            className="fa-brands fa-paypal"
-                            aria-hidden="true"
-                        ></i>
-                        Donation
-                        <i
-                            className="fa-solid fa-arrow-up-right"
-                            aria-hidden="true"
-                        ></i>
-                    </a>
-                </div>
-            </nav>
-
-            <div className="overlay" />
 
             <main className="about-main">
                 <section className="hero-section" aria-label="Hero Image">
@@ -388,93 +280,7 @@ export default function About() {
                 </section>
             </main>
 
-            <footer>
-                <div className="footer-content">
-                    <div className="footer-sitemap">
-                        <div className="sitemap-column">
-                            <h3>
-                                <a href="/about.html">About Us</a>
-                            </h3>
-                            <ul>
-                                <li>
-                                    <a href="/about.html#org-intro">
-                                        About CHOPSTICKSTORY
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="/about.html#team-section">
-                                        Our Team
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="/project.html">Our Project</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div className="sitemap-column">
-                            <h3>
-                                <a href="/programs.html">Programs</a>
-                            </h3>
-                            <ul>
-                                <li>
-                                    <a href="/programs.html#mundam">
-                                        MunDam: Infusing Culture
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="/programs.html#yedam">
-                                        YeDam: Infusing Art
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="/programs.html#deokdam">
-                                        DeokDam: Infusing Virtue
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="/programs.html#chedam">
-                                        CheDam: Infusing Experiences
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div className="sitemap-column">
-                            <h3>Connect</h3>
-                            <ul>
-                                <li>
-                                    <a href="mailto:info@chopstickstory.org">
-                                        Contact Us
-                                    </a>
-                                </li>
-                                <li>
-                                    <a
-                                        href="https://www.paypal.com/donate/?hosted_button_id=WZK3AX6WV9RMC"
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                    >
-                                        Donate
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div className="footer-grid">
-                        <div className="org-info">
-                            <h3>CHOPSTICKSTORY</h3>
-                            <p>
-                                A 501(c)(3) nonprofit organization | EIN:
-                                99-0860654 | Address: 20570 Shady Oak Ln,
-                                Cupertino, CA | Phone: (607) 973-0750 | Email:
-                                info@chopstickstory.org
-                            </p>
-                        </div>
-                    </div>
-                    <div className="copyright">
-                        <p>&copy; 2025 CHOPSTICKSTORY. All rights reserved.</p>
-                    </div>
-                </div>
-            </footer>
+            <Footer />
         </div>
     );
 }
