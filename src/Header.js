@@ -86,18 +86,6 @@ export default function Header() {
                     headerLink.addEventListener('click', handleHeaderLinkClick);
                     handlers.push({ trigger: headerLink, handler: handleHeaderLinkClick });
                 }
-                
-                // Prevent header click from toggling dropdown (only trigger button should toggle)
-                const handleHeaderClick = (e) => {
-                    // If click is on the trigger button, let it handle
-                    if (e.target === trigger || trigger.contains(e.target)) {
-                        return;
-                    }
-                    // Otherwise, stop propagation
-                    e.stopPropagation();
-                };
-                dropdownHeader.addEventListener('click', handleHeaderClick);
-                handlers.push({ trigger: dropdownHeader, handler: handleHeaderClick });
             }
             
             handlers.push({ trigger, handler: handleTriggerClick });
@@ -158,7 +146,6 @@ export default function Header() {
     return (
         <header ref={headerRef}>
             <div className="header-content">
-
                 <div className="header-left">
                     <div className="chopsticks" onClick={toggleMenu}  ref={chopsticksRef}>
                         <span></span>
@@ -216,7 +203,8 @@ export default function Header() {
                                 About CHOPSTICKSTORY
                             </Link>
                             <Link to="/about#team-section">Our Team</Link>
-                            <Link to="/project">Our Project</Link>
+                            {/* <Link to="/project">Our Project</Link> */}
+                            {/* Relocate the project location */}
                         </div>
                     </div>
                     
@@ -225,8 +213,14 @@ export default function Header() {
                             <Link to="/programs" className="menu-link">
                                 Programs
                             </Link>
-                            <button className="dropdown-trigger">
-                                <i className="fa-solid fa-chevron-down"></i>
+                            <button 
+                                className="dropdown-trigger"
+                                aria-label="Toggle About Us dropdown"
+                            >
+                                <i 
+                                    className="fa-solid fa-chevron-down"
+                                    aria-hidden="true"
+                                ></i>
                             </button>
                         </div>
                         <div className="dropdown-menu">
@@ -244,6 +238,23 @@ export default function Header() {
                             </Link>
                         </div>
                     </div>
+
+                    <div className="dropdown">
+                        <div className="dropdown-header">
+                            <Link to="/event" className="menu-link">
+                                Events
+                            </Link>
+                        </div>
+                    </div>
+
+                    <div className="dropdown">
+                        <div className="dropdown-header">
+                            <Link to="/project" className="menu-link">
+                                Projects
+                            </Link>
+                        </div>
+                    </div>
+
                 </div>
                 <div className="social-links">
                     <a
