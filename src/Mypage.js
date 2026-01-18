@@ -25,7 +25,7 @@ export default function Mypage() {
             <div className="mypage-container">
                 {/* Top Section - Fixed */}
                 <div className="mypage-top-section">
-                    <h1 className="mypage-greeting">HI! {userName}</h1>
+                    {/* <h1 className="mypage-greeting">HI! {userName}</h1> */}
                     <div className="mypage-volunteer-header">
                         <h2 className="mypage-volunteer-title">VOLUNTEER</h2>
                         <div className="mypage-arrow"></div>

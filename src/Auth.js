@@ -1,6 +1,6 @@
 import './styles.css';
 import './Main.js';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import b from './assets/Sample/adrien-bruneau-8cpR_Yf0rQs-unsplash.jpg';
 import c from './assets/STAMP-LOGO.webp';
 import Header from './Header';
@@ -41,6 +41,7 @@ function getModeClasses(mode) {
 
 export default function Auth() {
     const location = useLocation();
+    const navigate = useNavigate();
     const mode = getAuthMode(location.pathname);
     const classes = getModeClasses(mode);
 
@@ -65,9 +66,7 @@ export default function Auth() {
                 <Link to="/forgot-password" className="auth-link login-forgot-link">Forgot Password?</Link>
                 <button className="auth-button-primary login-button">Login</button>
                 <hr className="auth-divider login-divider"/>
-                <Link to="/signup">
-                    <button className="auth-button-secondary sign-in-button">Join us</button>
-                </Link>
+                <button type="button" className="auth-button-secondary sign-in-button" onClick={() => navigate('/signup')}>Join us</button>
             </div>
         </>
     );

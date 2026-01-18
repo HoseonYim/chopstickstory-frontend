@@ -30,7 +30,7 @@
     left: 0;
     right: 0;
     width: 100%;
-    padding: 1.7rem 5rem;
+    padding: 1.7rem 3rem 0.5rem;
     background: #FFFFFF;
     z-index: 100;
     display: flex;
@@ -67,6 +67,7 @@
     gap: 1.2rem;
     padding: 0 1.5rem;
     margin-top: 0rem; /* 아래로 이동 */
+    margin-left: auto;
     align-self: flex-end;
 }
 
@@ -103,18 +104,17 @@
     position: absolute;
     width: calc(100% - 6rem); /* padding 제외 */
     height: 0;
-    left: 3rem;
     border: 0.125rem solid #000000;
     z-index: 10; /* Top section 위에 표시되도록 */
 }
 
 /* Top Lines - 원본: top 278px, 291px */
 .line-top-1 {
-    top: 12vh;
+    top: 10vh;
 }
 
 .line-top-2 {
-    top: 13vh;
+    top: 11vh;
 }
 
 /* Bottom Lines - 원본: top 1345px, 1358px */
@@ -130,7 +130,7 @@
 .mypage-left-section {
     position: absolute;
     left: 3rem; /* 원본 left: 89px 기준 */
-    top: 14vh; /* Top line 아래 */
+    top: 11vh; /* Top line 아래 */
     padding: 0 1.5rem;
     width: 45%; /* width 증가 */
     max-width: 40rem; /* max-width 증가 */
@@ -246,7 +246,7 @@
     position: absolute;
     width: calc(100% - 3rem); /* 부모 padding(1.5rem * 2) 제외 */
     left: 1.5rem; /* 부모 padding만큼 오프셋 */
-    top: 1.5rem;
+    top: 0.5rem;
     height: calc(82vh - 14vh - 0.5vh); /* Bottom line 위까지 - 여백 조정 */
     max-height: calc(100vh - var(--header-height) - 14vh - 0.5vh); /* 화면 높이 제한 */
     background: #D8D8D8;
@@ -265,13 +265,13 @@
     font-family: 'Koulen', sans-serif;
     font-style: normal;
     font-weight: 400;
-    font-size: 1.4rem; /* 20% 축소 */
+    font-size: 2rem; /* 20% 축소 */
     line-height: 1.8; /* 원본 90px/50px = 1.8 */
     text-align: left;
     letter-spacing: 0.05em;
     color: #000000;
     margin: 0 0 2vh 0;
-    padding-bottom: 0.7rem;
+    padding-bottom: 0.3rem;
     padding-left: 0.7rem;
     word-wrap: break-word;
     overflow-wrap: break-word;
@@ -282,7 +282,7 @@
 /* History Header Line - 원본: left 889px, top 451px, width 707px */
 .mypage-history-header {
     position: relative;
-    width: 100%;
+    width: 86%;
     height: 0;
     margin: 1.5vh 0;
     display: flex;
@@ -324,7 +324,7 @@
     position: relative;
     width: 100%;
     min-height: 5vh; /* 원본 93px 기준으로 화면에 맞게 */
-    border-radius: 1.5rem; /* 원본 25px 기준 */
+    border-radius: 1rem; /* 원본 25px 기준 */
     margin: 0 0 1vh 0;
     display: flex;
     align-items: center;
