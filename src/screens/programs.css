@@ -74,6 +74,8 @@
     color: #4b5563;
     margin-bottom: 1.5rem;
     line-height: 1.6;
+    padding-left: 1rem;
+    text-align: left;
 }
 
 .program-link {

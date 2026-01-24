@@ -979,6 +979,8 @@ main {
     border-radius: 4px;
     font-weight: 500;
     transition: all 0.3s ease;
+    margin-right: 22.5rem;
+    white-space: nowrap;
 }
 
 .slide-btn:hover {
