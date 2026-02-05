@@ -1,0 +1,13 @@
+version: '3.8'
+services:
+    react-app:
+        build:
+            context: .
+            dockerfile: Dockerfile.dev
+        ports:
+            - '5173:5173' # Map host port to container port
+        volumes:
+            - .:/app # Syncs your local folder with the container
+            - /app/node_modules # Prevents host node_modules from overriding container's
+        environment:
+            - CHOKIDAR_USEPOLLING=true # Essential for hot-reload on Windows/WSL
